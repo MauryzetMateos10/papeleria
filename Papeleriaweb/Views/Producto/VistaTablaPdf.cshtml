@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Papeleriaweb.Models.Producto>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Lista de productos</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Papeleriaweb.styles.css" asp-append-version="true" />
+    <style>
+        /* Agrega aquí tus estilos CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Color de fondo */
+        }
+
+        .alert-primary {
+            background-color: #FFD700; /* Amarillo */
+            color: #FFFFFF; /* Texto blanco */
+            border-color: #FFD700; /* Borde del encabezado */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #FF6347; /* Rojo */
+            color: #FFFFFF; /* Texto blanco */
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #FFE4B5; /* Amarillo claro para filas impares */
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #FFA07A; /* Rojo claro para filas pares */
+        }
+    </style>
+</head>
+<body>
+    <h1 class="alert alert-primary text-center">
+        Administración de productos
+    </h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(p => p.Id_producto)</th>
+                    <th>@Html.DisplayNameFor(p => p.Nombreproducto)</th>
+                    <th>@Html.DisplayNameFor(p => p.Marcaproducto)</th>
+                    <th>@Html.DisplayNameFor(p => p.Descripcionproducto)</th>
+                    <th>Precio Unitario</th>
+                    <th>@Html.DisplayNameFor(p => p.Stockproducto)</th>
+                    <th>@Html.DisplayNameFor(p => p.Tamañoproducto)</th>
+                    <th>@Html.DisplayNameFor(p => p.Colorproducto)</th>
+                    <th>@Html.DisplayNameFor(p => p.Tipoproducto)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(p => item.Id_producto)</td>
+                        <td>@Html.DisplayFor(p => item.Nombreproducto)</td>
+                        <td>@Html.DisplayFor(p => item.Marcaproducto)</td>
+                        <td>@Html.DisplayFor(p => item.Descripcionproducto)</td>
+                        <td>@string.Format("{0:C}", item.Precioproducto)</td>
+                        <td>@Html.DisplayFor(p => item.Stockproducto) unidades</td>
+                        <td>@Html.DisplayFor(p => item.Tamañoproducto)</td>
+                        <td>@Html.DisplayFor(p => item.Colorproducto)</td>
+                        <td>@Html.DisplayFor(p => item.Tipoproducto)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

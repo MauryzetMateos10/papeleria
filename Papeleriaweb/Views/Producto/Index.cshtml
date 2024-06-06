@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Papeleriaweb.Models.Producto>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h5 class="alert alert-info text-center">
+                Administración de Productos
+            </h5>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-6">
+            <form asp-action="Index" method="get">
+                <div class="input-group">
+                    <input type="text" name="buscar" class="form-control" placeholder="Buscar productos..." />
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fa-solid fa-search"></i> Buscar
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" asp-controller="Producto" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> Agregar Producto
+            </a>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="productoId">Seleccionar Producto:</label>
+                <select class="form-control" id="productoId" name="productoId">
+                    <option value="">Todos los Productos</option>
+                    @foreach (var producto in Model)
+                    {
+                        <option value="@producto.Id_producto">@producto.Nombreproducto</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="alert alert-warning text-center">
+                    Lista de Productos
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="Productos" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(p => p.Id_producto)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Nombreproducto)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Marcaproducto)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Descripcionproducto)</th>
+                                    <th>Precio Unitario</th>
+                                    <th>@Html.DisplayNameFor(p => p.Stockproducto)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Tamañoproducto)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Colorproducto)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Tipoproducto)</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(p => item.Id_producto)</td>
+                                        <td>@Html.DisplayFor(p => item.Nombreproducto)</td>
+                                        <td>@Html.DisplayFor(p => item.Marcaproducto)</td>
+                                        <td>@Html.DisplayFor(p => item.Descripcionproducto)</td>
+                                        <td>@string.Format("{0:C}", item.Precioproducto)</td>
+                                        <td>@Html.DisplayFor(p => item.Stockproducto) unidades</td>
+                                        <td>@Html.DisplayFor(p => item.Tamañoproducto)</td>
+                                        <td>@Html.DisplayFor(p => item.Colorproducto)</td>
+                                        <td>@Html.DisplayFor(p => item.Tipoproducto)</td>
+                                        <td>
+                                            <a class="btn btn-dark" asp-controller="Producto" asp-action="Edit" asp-route-id="@item.Id_producto">
+                                                <i class="fa-solid fa-user-pen"></i> Editar
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-danger" asp-controller="Producto" asp-action="Delete" asp-route-id="@item.Id_producto">
+                                                <i class="fa-solid fa-trash"></i> Eliminar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        <form asp-controller="Producto" asp-action="GeneratePdf" method="post">
+                                            <button type="submit" class="btn btn-outline-danger">
+                                                <i class="fa-solid fa-file-pdf"></i> Generar PDF
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        // Obtener el valor seleccionado del producto
+        $("#productoId").change(function () {
+            var selectedProductId = $(this).val();
+            // Aquí puedes realizar acciones específicas según el producto seleccionado
+            console.log("Producto seleccionado: " + selectedProductId);
+        });
+    });
+</script>
+
+
+
+
